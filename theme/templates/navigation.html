@@ -1,0 +1,26 @@
+<nav class="bg-white shadow">
+  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+    <div class="relative flex items-center justify-between h-16">
+        <div class="flex-shrink-0 font-extrabold px-3">
+          BelayMe
+        </div>
+      {% if user.is_authenticated %}
+        {% comment %}<li><a href="{% url 'account_email' %}">Change E-mail</a></li>{% endcomment %}
+      <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+      {% else %}
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <a href="{% url 'account_login' %}" class="mr-3 relative inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <span>Sign In</span>
+            </a>
+          </div>
+          <div class="flex-shrink-0">
+            <a href="{% url 'account_signup' %}" class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <span>Sign up</span>
+            </a>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</nav>

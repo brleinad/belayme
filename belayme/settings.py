@@ -40,13 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    #
+    # 3rd party
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    #
-    'common',
+    'widget_tweaks',
     'tailwind',
+    # local
+    'common',
     'theme',
 ]
 
