@@ -5,6 +5,7 @@ from django.db import models
 
 from common.managers import UserManager
 
+# from core.models import ContactBook
 
 class TimestampedModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
