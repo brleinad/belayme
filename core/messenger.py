@@ -43,11 +43,12 @@ class Messenger:
 
         for messenger_user in messenger_users:
             messenger_user.is_belayer = False
-            is_messenger_user_belayer = MessengerBelayer.objects.filter(
+            messenger_user_belayer = MessengerBelayer.objects.filter(
                 messenger_id=messenger_user.uid,
                 user=self.user).first()
-            if is_messenger_user_belayer:
+            if messenger_user_belayer:
                 messenger_user.is_belayer = True
+                messenger_user.id = messenger_user_belayer.id
 
         self.contacts = messenger_users
         return self.contacts

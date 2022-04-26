@@ -41,9 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     # 3rd party
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
     'widget_tweaks',
     'tailwind',
     # local
@@ -141,18 +138,12 @@ AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
     # `allauth` specific authentication methods, such as login by e-mail
-    # 'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 AUTH_USER_MODEL = "common.User"
-LOGIN_REDIRECT_URL = "/contacts/"
+LOGIN_REDIRECT_URL = "/send/"
+LOGOUT_REDIRECT_URL = "/"
 
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_ADAPTER = 'core.adapter.CustomAccountAdapter'
-ACCOUNT_SIGNUP_REDIRECT_URL=''
 
 TAILWIND_APP_NAME = 'theme'
 INTERNAL_IPS = [

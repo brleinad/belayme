@@ -49,10 +49,28 @@ class RemoveBelayerView(generic.DeleteView):
 class MessagingView(generic.FormView):
     template_name = 'message.html'
     form_class = forms.MessageForm
-    success_url = reverse_lazy('send_message')
+    success_url = reverse_lazy('message_sent')
 
     def form_valid(self, form):
         messenger = Messenger(self.request.user, self.request.session.get('messenger_session'))
         message = form.cleaned_data.get('message')
-        messenger.send_message(message)
+        try:
+            messenger.send_message(message)
+        except Exception as error:
+            print(f'ERROR sending message: {error}')
+            # TODO validation error and let the user know and redirect back to messaging view
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['belayers'] = models.MessengerBelayer.objects.filter(user=self.request.user)
+        return context
+
+
+class MessageSentView(generic.TemplateView):
+    template_name = 'sent_message.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['belayers'] = models.MessengerBelayer.objects.filter(user=self.request.user)
+        return context
