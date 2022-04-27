@@ -11,6 +11,7 @@ django-tailwind = "^3.1.1"
 django-widget-tweaks = "^1.4.12"
 fbchat = {git = "https://github.com/brleinad/fbchat.git", rev = "v1"}
 gunicorn = "^20.1.0"
+whitenoise = "^6.0.0"
 
 [tool.poetry.dev-dependencies]
 

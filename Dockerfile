@@ -19,10 +19,12 @@ RUN apt-get -y update && apt-get -y autoremove
 RUN mkdir /app
 WORKDIR /app
 
-RUN apt-get install -y python python-pip python-dev curl netcat git
+RUN apt-get install -y python python-pip python-dev curl netcat git \
+  && curl -sL https://deb.nodesource.com/setup_14.x | bash - \
+  && apt-get install -y nodejs --no-install-recommends \
+  && apt-get clean \
+  && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 
-# install poetry
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 ENV PATH="${PATH}:/root/.poetry/bin"
 
 COPY pyproject.toml poetry.lock ./
@@ -30,8 +32,9 @@ RUN poetry config virtualenvs.create false \
   && poetry install --no-interaction --no-ansi
 
 COPY . .
-RUN python manage.py migrate
-# RUN python manage.py collectstatic --noinput
+
+ENV SECRET_KEY $SECRET_KEY
+ENV ENV prod
 
 EXPOSE 8000
-CMD ["gunicorn", "belayme.wsgi", "-b", "0.0.0.0:8000", "--access-logfile", "-"]
+CMD ["/app/entrypoint.sh"]

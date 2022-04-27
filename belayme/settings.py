@@ -29,6 +29,19 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+ENV = os.environ['ENV']
+if ENV == 'prod':
+    print('Production time!')
+    SECRET_KEY = os.environ['SECRET_KEY']
+    DEBUG = False
+    ALLOWED_HOSTS = ['0.0.0.0']
+    STATIC_URL = 'static/'
+    STATIC_ROOT = './static/'
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+
+
+ADMINS = [('Daniel RB', 'daniel@danielrb.dev')]
 
 # Application definition
 
@@ -57,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'belayme.urls'

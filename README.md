@@ -14,3 +14,8 @@ Find your next belayer.
 ## Deployment
 
 TODO
+
+```
+docker build . -t belayme
+docker run -p 8000:8000 -e "SECRET_KEY=secret" -e "ENV=prod" --name belayme-cont belayme 
+```
