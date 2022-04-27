@@ -33,8 +33,8 @@ ENV = os.environ['ENV']
 if ENV == 'prod':
     print('Production time!')
     SECRET_KEY = os.environ['SECRET_KEY']
-    DEBUG = False
-    ALLOWED_HOSTS = ['0.0.0.0']
+    DEBUG = True
+    ALLOWED_HOSTS = ['0.0.0.0', 'belayme.fly.dev'] #os.getenv("ALLOWED_HOSTS", "0.0.0.0").split()
     STATIC_URL = 'static/'
     STATIC_ROOT = './static/'
     CSRF_COOKIE_SECURE = True

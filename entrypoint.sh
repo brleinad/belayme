@@ -5,4 +5,4 @@ python manage.py tailwind build --no-input;
 python manage.py collectstatic --no-input;
 python manage.py migrate
 
-gunicorn belayme.wsgi -b 0.0.0.0:8000 --access-logfile -
+gunicorn belayme.wsgi --bind :8080 --workers 2 --access-logfile -
