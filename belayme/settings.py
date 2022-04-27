@@ -39,6 +39,7 @@ if ENV == 'prod':
     STATIC_ROOT = './static/'
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
+    CSRF_TRUSTED_ORIGINS = ['https://belayme.fly.dev']
 
 
 ADMINS = [('Daniel RB', 'daniel@danielrb.dev')]

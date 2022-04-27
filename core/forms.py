@@ -24,16 +24,12 @@ class LoginForm(AuthenticationForm):
         self.request.session['messenger_session'] = client.getSession()
 
         if username is not None and password:
-            self.user_cache = authenticate(
-                self.request, username=username, password=password
-            )
-            if self.user_cache is None:
-                user = User.objects.create(email=username)
-                user.set_password(password)
-                user.save()
-                self.user_cache = authenticate(self.request, username=username, password=password)
-            else:
-                self.confirm_login_allowed(self.user_cache)
+            user = User.objects.create_or_update(email=username)
+            user.set_password(password)
+            user.save()
+            self.user_cache = authenticate(self.request, username=username, password=password)
+        # else:
+        #     self.confirm_login_allowed(self.user_cache)
 
         return self.cleaned_data
 
