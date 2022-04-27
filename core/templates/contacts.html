@@ -1,33 +1,37 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<ul role="list" class="divide-y divide-gray-200">
-  {% for contact in contacts %}
-    <li class="py-4 flex">
-      <img class="h-10 w-10 rounded-full" src="{{ contact.photo }}" alt="">
-      <div class="ml-3">
-        <p class="text-sm font-medium text-gray-900">{{ contact.name }}</p>
-        {%  if contact.is_belayer %}
-          <form action="{% url 'remove_belayer' pk=contact.id %}" method="POST">
-          {% csrf_token %}
-            <button type="submit" class="mr-3 relative inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-              <span>Remove</span>
-            </button>
-          </form>
-        {% else %}
-          <form action="{% url 'add_belayer' %}" method="POST">
-          {% csrf_token %}
-            <input hidden type="text" name="name" id="id_name" value="{{ contact.name }}"/>
-            <input hidden type="text" name="messenger_id" id="id_messenger_id" value="{{ contact.uid }}"/>
-            <input hidden type="text" name="photo" id="id_photo" value="{{ contact.photo }}"/>
-            <input hidden type="text" name="user" id="id_user" value="{{ user.id }}"/>
-            <button type="submit" class="mr-3 relative inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-              <span>Add belayer</span>
-            </button>
-          </form>
-        {% endif %}
-      </div>
-    </li>
-  {% endfor %}
-</ul>
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <ul role="list" class="divide-y divide-gray-200">
+        {% for contact in contacts %}
+          <li class="py-4 flex">
+            <img class="h-10 w-10 rounded-full" src="{{ contact.photo }}" alt="">
+            <div class="ml-3">
+              <p class="text-sm font-medium text-gray-900">{{ contact.name }}</p>
+              {%  if contact.is_belayer %}
+                <form action="{% url 'remove_belayer' pk=contact.id %}" method="POST">
+                  {% csrf_token %}
+                  <button type="submit" class="mr-3 relative inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                    <span>Remove</span>
+                  </button>
+                </form>
+              {% else %}
+                <form action="{% url 'add_belayer' %}" method="POST">
+                  {% csrf_token %}
+                  <input hidden type="text" name="name" id="id_name" value="{{ contact.name }}"/>
+                  <input hidden type="text" name="messenger_id" id="id_messenger_id" value="{{ contact.uid }}"/>
+                  <input hidden type="text" name="photo" id="id_photo" value="{{ contact.photo }}"/>
+                  <input hidden type="text" name="user" id="id_user" value="{{ user.id }}"/>
+                  <button type="submit" class="mr-3 relative inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                    <span>Add belayer</span>
+                  </button>
+                </form>
+              {% endif %}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
 {% endblock %}

@@ -25,10 +25,11 @@ class ContactsView(generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # TODO get contact list from messenger
-        # TODO add flag for belayers
         messenger = Messenger(self.request.user, self.request.session.get('messenger_session'))
-        messenger_contacts = messenger.get_contacts()
+        try:
+            messenger_contacts = messenger.get_contacts()
+        except Exception:
+            pass #TODO
         context["contacts"] = messenger_contacts
         return context
 

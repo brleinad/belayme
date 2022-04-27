@@ -6,9 +6,15 @@
         <div class="ml-3">
           <p class="text-sm font-medium text-gray-900">{{ contact.name }}</p>
           {%  if show_remove %}
-            <a href="{% url 'remove_belayer' %}" class="mr-3 relative inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-              <span>Remove</span>
-            </a>
+            {% comment %}
+            TODO: redirect to correct page
+            <form action="{% url 'remove_belayer' pk=contact.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="mr-3 relative inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                <span>Remove</span>
+              </button>
+            </form>
+            {% endcomment %}
           {% endif %}
         </div>
       </li>
